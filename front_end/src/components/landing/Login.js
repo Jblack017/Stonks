@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 export default function LoginSignup({ login }) {
-  const [userName, setUserName] = useState("elon");
-  const [password, setPassword] = useState("musk");
+  const [userName, setUserName] = useState("username");
+  const [password, setPassword] = useState("password");
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -10,8 +10,7 @@ export default function LoginSignup({ login }) {
   };
 
   return (
-    <div className='login-signup'>
-      LoginSignup
+    <div className='login'>
       <form onSubmit={event => handleSubmit(event)}>
         <label>
           User Name:

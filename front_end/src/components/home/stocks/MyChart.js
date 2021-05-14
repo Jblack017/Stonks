@@ -8,7 +8,7 @@ export default function MyChart({ stockObj, stockSym }) {
     const hour = property.split(" ")[1].split(":")[0];
     const minute = property.split(" ")[1].split(":")[1];
     const day = property.split(" ")[0].split("-")[2];
-    const dayHourMin = day + "." + hour + minute;
+    const dayHourMin = day + hour + minute;
 
     const record = [
       dayHourMin,
@@ -45,7 +45,7 @@ export default function MyChart({ stockObj, stockSym }) {
       <Chart
         chartType='LineChart'
         width='100%'
-        height='400px'
+        height='300px'
         data={StockData}
         options={options}
       />

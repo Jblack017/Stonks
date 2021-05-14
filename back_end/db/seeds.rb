@@ -4,6 +4,7 @@ Stock.destroy_all
 
 damon = User.create(username: "damonc", password: "damonc")
 elon = User.create(username: "elon", password: "musk")
+josh = User.create(username: "josh", password: "notapassword")
 
 tesla = Stock.create(ticker: "tsla", last_updated: "2021-05-12 18:40:00", low: 25.58, high: 25.25, open: 27.55, close: 35.57) 
 google = Stock.create(ticker: "goog", last_updated: "2021-05-12 18:40:00", low: 25.53, high: 25.26, open: 27.57, close: 35.56) 

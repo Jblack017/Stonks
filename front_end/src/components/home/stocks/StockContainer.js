@@ -1,13 +1,12 @@
 import React from "react";
+import SimpleStockCard from "./SimpleStockCard";
 
-export default function StockContainer({ user }) {
-  const [userStocks, setUserStocks] = useState([]);
+export default function StockContainer({ userStocks }) {
+  const renderStocks = () => {
+    return userStocks.map(stock => {
+      return <SimpleStockCard key={stock.id} stock={stock} />;
+    });
+  };
 
-  useEffect(() => {
-    fetch(`http://localhost:9393/mystocks/?=${user.id}`)
-      .then(res => res.json())
-      .then(console.log);
-  }, []);
-
-  return <div>StockContainer</div>;
+  return <div className='stock-container'>{renderStocks()}</div>;
 }

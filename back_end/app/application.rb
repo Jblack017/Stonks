@@ -14,9 +14,10 @@ class Application
       body = JSON.parse(req.body.read)
       user = User.find_by username: body["username"]
       passwordMatch = user.password == body["password"]
-
+      
         if user && passwordMatch
-          return [200, {"Content-Type" => "application/json"}, [{"id": user.id, "username": user.username}.to_json]]
+          userStocks = user.stocks
+          return [200, {"Content-Type" => "application/json"}, [{"userStocks": userStocks, "id": user.id, "username": user.username}.to_json]]
         else
           return [401, {"Content-Type" => "application/json"}, [{error: "No user found"}.to_json]]
         end
@@ -45,17 +46,16 @@ class Application
           return [401, {"Content-Type" => "application/json"}, [{error: "No user found"}.to_json]]
         end
 
-  when "/mystocks/?=#"
-    if req.get?
+  when "/mystocks"
+    if req.post?
+      binding.pry
       data = JSON.parse req.body.read
       userID = data["user"]["user_id"]
-      binding.pry 
-      return
-    else
-      return
+      # userStocks = stock.all 
+      return [200, {"Content-Type" => "application/json"}, [userStocks.to_json]]
     end
 
-    end
+  # end
   else
     return [401, {"Content-Type" => "application/json"}, [{error: "No user found"}.to_json]]
   end

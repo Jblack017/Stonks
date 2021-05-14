@@ -18,9 +18,17 @@ function App() {
       .then(user => setUser(user));
   };
 
+  const logout = () => {
+    setUser({});
+  };
+
   return (
     <div className='App'>
-      {!user.id ? <Login login={login} /> : <Home user={user} />}
+      {!user.id ? (
+        <Login className='login' login={login} />
+      ) : (
+        <Home logout={logout} className='home' user={user} />
+      )}
     </div>
   );
 }

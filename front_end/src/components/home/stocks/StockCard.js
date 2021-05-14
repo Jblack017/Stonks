@@ -1,7 +1,12 @@
 import React from "react";
 import MyChart from "./MyChart";
 
-export default function StockCard({ stockObj, user }) {
+export default function StockCard({
+  stockObj,
+  user,
+  addUserStock,
+  clearStockObj,
+}) {
   const stockSym = stockObj["Meta Data"]["2. Symbol"];
   const lastRefreshed = stockObj["Meta Data"]["3. Last Refreshed"];
 
@@ -49,19 +54,21 @@ export default function StockCard({ stockObj, user }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userStonk),
-    });
+    }).then(addUserStock(userStonk.stock));
   };
 
   return (
-    <div>
-      <title>{stockSym}</title>
-      <p>Open: ${stockPreviousOpen}</p>
-      <p>Close: ${stockPreviousClose}</p>
-      <p>High: ${stockPreviousLow}</p>
-      <p>Low: ${stockPreviousHigh}</p>
-      <p>Volume: {stockPreviousVol}</p>
+    <div className='stock-card'>
       <MyChart stockSym={stockSym} stockObj={stockObj["Time Series (5min)"]} />
-      <button onClick={() => handleClick()}>Refresh</button>
+      <div className='search-contents'>
+        <button onClick={() => handleClick()}>Like</button>
+        <button onClick={() => clearStockObj()}>reset</button>
+        <p>Open: ${stockPreviousOpen}</p>
+        <p>Close: ${stockPreviousClose}</p>
+        <p>High: ${stockPreviousLow}</p>
+        <p>Low: ${stockPreviousHigh}</p>
+        <p>Volume: {stockPreviousVol}</p>
+      </div>
     </div>
   );
 }
